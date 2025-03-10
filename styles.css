@@ -1,0 +1,158 @@
+/* ensure body and html take up full screen*/
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+#video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2; 
+    pointer-events: none; 
+}
+
+#bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* fullscreenplayback */
+}
+
+/* flicker overlay (black div) */
+.flicker-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    pointer-events: none; /* prevents blocking clicks */
+    opacity: 0; /* start fully transparent */
+    z-index: 1000; /* ensure it's above everything */
+}
+
+.solebtn {
+    position: absolute;
+    bottom: 10%;
+    left: 50%; 
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto; 
+}
+
+
+.solebtn button {
+    background: rgba(0, 0, 0, 0.6); /* Dark semi-transparent */
+    color: white;
+    font-size: 1.5rem;
+    padding: 30px 30px;
+    border: 2px solid white;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    backdrop-filter: blur(5px); /* Soft blur effect */
+    border-radius: 10px;
+}
+
+.leftbtn, .rightbtn {
+    position: absolute;
+    bottom: 10%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15vw; 
+    min-width: 120px; /* prevent buttons from getting too small */
+}
+
+.leftbtn {
+    left: 5%; /* keep it away from the edge */
+}
+
+.rightbtn {
+    right: 5%; /* keep it away from the edge */
+}
+
+.leftbtn button, .rightbtn button {
+    background: rgba(0, 0, 0, 0.6); 
+    color: white;
+    font-size: 1.5rem;
+    padding: 15px 30px;
+    border: 2px solid white;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    backdrop-filter: blur(5px); 
+    border-radius: 10px;
+}
+
+.leftbtn button:hover, .rightbtn button:hover, .solebtn button:hover {
+    background: rgba(255, 255, 255, 0.5);
+    color: black;
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .leftbtn, .rightbtn, .solebtn {
+        width: 25vw; 
+        min-width: 100px; 
+        bottom: 5%; 
+    }
+
+    .leftbtn {
+        left: 3%;
+    }
+
+    .rightbtn {
+        right: 3%;
+    }
+
+    .solebtn {
+        right: 3%;
+    }
+
+    .leftbtn button, .rightbtn, .solebtn button {
+        font-size: 1.2rem; 
+        padding: 10px 20px;
+    }
+}
+
+/* scroll (parchment) text container */
+.text {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    max-width: 90vw;
+    min-width: 300px;
+    padding: 60px 80px; /* add padding to keep text inside the scroll */
+    background: url("assets/parchment.png") no-repeat center;
+    background-size: 100% 100%;
+    text-align: center;
+    color: #3a2f1f;
+    font-family: 'Garamond', serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    transition: width 0.3s ease-in-out;
+    overflow: hidden; /* prevents text from spilling outside */
+}
+
+.text p, .text span {
+    font-size: 10px !important; /* ensure child elements inherit */
+}
+
+/* adjust scroll width for smaller screens */
+@media (max-width: 768px) {
+    .text {
+        width: 90vw;
+        padding: 40px 90px;
+    }
+}
